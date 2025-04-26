@@ -1,5 +1,10 @@
 # DemoUi
 
+This project is a simple Angular application that fetches the Top 200 Stories (Title and URL) from an external API and displays them with a loader spinner.
+It is fully unit-tested and ready for deployment.
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
 ## Development server
@@ -25,3 +30,4 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
