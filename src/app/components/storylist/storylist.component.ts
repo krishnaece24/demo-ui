@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StoryService, Story } from '../../services/story.service';
+import { MatProgressSpinner, MatSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-storylist',
