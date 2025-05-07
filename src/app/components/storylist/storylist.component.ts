@@ -11,6 +11,10 @@ export class StorylistComponent implements OnInit {
 
   stories: Story[] = [];
   loading = false;
+  filteredStories: any[] = [];
+  searchQuery: string = '';
+  page: number = 1;
+  pageSize: number = 10;
 
   constructor(private storyService: StoryService) {}
 
@@ -20,9 +24,10 @@ export class StorylistComponent implements OnInit {
 
   fetchStories(): void {
     this.loading = true;
-    this.storyService.getStories().subscribe({
+    this.storyService.getStories(this.page).subscribe({
       next: (data) => {
         this.stories = data;
+        this.applySearch();
         setTimeout(() => {         
         this.loading = false;
         }, 1000);
@@ -32,5 +37,31 @@ export class StorylistComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  applySearch(): void {
+    if (this.searchQuery) {
+      this.filteredStories = this.stories.filter(story =>
+        story.title?.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      this.filteredStories = [...this.stories];
+    }
+  }
+
+  onSearchChange(): void {
+    this.applySearch();
+  }
+
+  nextPage(): void {
+    this.page++;
+    this.fetchStories();
+  }
+
+  prevPage(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.fetchStories();
+    }
   }
 }

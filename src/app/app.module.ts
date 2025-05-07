@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StorylistComponent } from './components/storylist/storylist.component';
 import { AppConfigService } from './services/appconfig.service';
+import { FormsModule } from '@angular/forms';
 export function initializeApp(configService: AppConfigService) {
   return () => configService.load();
 }
@@ -21,7 +22,7 @@ export function initializeApp(configService: AppConfigService) {
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    FormsModule
   ],
   providers: [
     {

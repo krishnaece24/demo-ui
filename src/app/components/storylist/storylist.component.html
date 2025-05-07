@@ -1,20 +1,26 @@
 <div *ngIf="loading" class="spinner-overlay">
     <div class="spinner"></div>
 </div>
+<div *ngIf="!loading">
+    <input type="text" class="searchtextbox" [(ngModel)]="searchQuery" (input)="onSearchChange()"
+        placeholder="Search by title..." />
+    <br>
+    <div *ngIf="filteredStories.length">
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>URL</th>
+            </tr>
+            <tr *ngFor="let story of filteredStories" class="story">
+                <td>{{ story.title }}</td>
+                <td><a [href]="story.url" target="_blank">{{ story.url }}</a></td>
+            </tr>
+        </table>
+        <button (click)="prevPage()" [disabled]="page === 1">Prev</button>
+        <button (click)="nextPage()" style="margin-left: 0.5rem;">Next</button>
+    </div>
 
-<div *ngIf="!loading && stories.length">
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>URL</th>
-        </tr>
-        <tr *ngFor="let story of stories" class="story">
-            <td>{{ story.title }}</td>
-            <td>{{ story.url }}</td>
-        </tr>
-    </table>
-</div>
-
-<div *ngIf="!loading && !stories.length">
-    No stories available.
+    <div *ngIf="!filteredStories.length">
+        No stories available.
+    </div>
 </div>

@@ -13,10 +13,12 @@ export interface Story {
 })
 export class StoryService {
 
-  apiUrl = this.configService.getSetting("HackerApiUrl");
-  constructor(private http: HttpClient, private configService: AppConfigService) {}
+  constructor(private http: HttpClient, private configService: AppConfigService) { }
 
-  getStories(): Observable<Story[]> {
-    return this.http.get<Story[]>(this.apiUrl);
+  getStories(page: number): Observable<Story[]> {
+    var apiUrl = this.configService.getSetting("HackerApiUrl");
+    var pageSize = this.configService.getSetting("PageSize");
+    return this.http.get<Story[]>(apiUrl + "?page=" + page + "&pagesize=" + pageSize);
+
   }
 }
